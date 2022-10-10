@@ -68,4 +68,14 @@ public class Message {
     public void setImportant(boolean important) {
         this.important = important;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", timestamp=" + timestamp +
+                ", text='" + text + '\'' +
+                ", important=" + important +
+                '}';
+    }
 }

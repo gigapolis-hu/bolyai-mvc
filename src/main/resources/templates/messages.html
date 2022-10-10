@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title data-th-text="${title}"></title>
+</head>
+<body>
+<h1 data-th-text="${title}"></h1>
+<ul>
+  <li data-th-each="message: ${messages}">
+      <b data-th-if="${message.important}" data-th-text="${message}"></b>
+      <span data-th-unless="${message.important}" data-th-text="${message}"></span>
+  </li>
+</ul>
+</body>
+</html>
