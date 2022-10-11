@@ -1,14 +1,20 @@
 package hu.bolyaitechnikum.bolyaimvc.controller;
 
 import hu.bolyaitechnikum.bolyaimvc.persistence.model.Message;
+import hu.bolyaitechnikum.bolyaimvc.persistence.repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class MessageController {
+
+    @Autowired
+    private MessageRepository messageRepository;
 
     // endpoint (adott URL-hez tartozó eseménykezelők)
     @GetMapping("/")
@@ -42,4 +48,34 @@ public class MessageController {
         return "messages";
     }
 
+    @GetMapping("/unordered")
+    public String listMessagesUnordered(Model model) {
+        // (List<Message>): kasztolás / típusellenőrzés kikapcsolása
+        List<Message> messages = (List<Message>) messageRepository.findAll();
+
+        model.addAttribute("title", "LIST UNORDERED");
+        model.addAttribute("messages", messages);
+
+        return "messages";
+    }
+
+    @GetMapping("/ordered")
+    public String listMessagesOrdered(Model model) {
+        List<Message> messages = messageRepository.findByOrderByTimestampDesc();
+
+        model.addAttribute("title", "LIST ORDERED");
+        model.addAttribute("messages", messages);
+
+        return "messages";
+    }
+
+    @GetMapping("/important")
+    public String listMessagesImportant(Model model) {
+        List<Message> messages = messageRepository.findByImportantOrderByTimestampDesc(true);
+
+        model.addAttribute("title", "IMPORTANT");
+        model.addAttribute("messages", messages);
+
+        return "messages";
+    }
 }
