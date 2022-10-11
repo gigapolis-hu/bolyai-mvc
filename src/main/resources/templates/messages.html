@@ -10,6 +10,7 @@
   <li data-th-each="message: ${messages}">
       <b data-th-if="${message.important}" data-th-text="${message}"></b>
       <span data-th-unless="${message.important}" data-th-text="${message}"></span>
+      <a data-th-href="@{/message/{id}(id=${message.id})}">view message</a>
   </li>
 </ul>
 </body>

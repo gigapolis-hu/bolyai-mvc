@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Message</title>
+</head>
+<body>
+<h1>View Message</h1>
+<p>
+    <img data-th-src="@{/balloon.png}" alt="balloon" width="200">
+</p>
+<table>
+    <tr>
+        <th>id</th>
+        <td data-th-text="${message.id}"></td>
+    </tr>
+    <tr>
+        <th>timestamp</th>
+        <td data-th-text="${message.timestamp}"></td>
+    </tr>
+    <tr>
+        <th>text</th>
+        <td data-th-text="${message.text}"></td>
+    </tr>
+    <tr>
+        <th>important</th>
+        <td data-th-text="${message.important}"></td>
+    </tr>
+</table>
+</body>
+</html>

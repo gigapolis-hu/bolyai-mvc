@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -77,5 +78,15 @@ public class MessageController {
         model.addAttribute("messages", messages);
 
         return "messages";
+    }
+
+    @GetMapping("/message/{id}")
+    public String viewMessage(@PathVariable long id, Model model) {
+        // orElseThrow: ha nincs találat, akkor hibát dob
+        Message message = messageRepository.findById(id).orElseThrow();
+
+        model.addAttribute("message", message);
+
+        return "view_message";
     }
 }
